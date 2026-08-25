@@ -28,6 +28,9 @@ npx ernest-config
 ```
 *Tidak perlu melakukan instalasi awal! Script setup akan secara otomatis mengatur konfigurasi editor Anda, memperbarui eslint/prettier config, serta menginstal `ernest-config` beserta seluruh devDependencies yang dibutuhkan ke dalam proyek lokal Anda.*
 
+> [!TIP]
+> **Pembersihan Cache Ekstensi VS Code**: Jika editor VS Code Anda masih menampilkan garis merah/error palsu setelah menjalankan setup, muat ulang window editor Anda dengan membuka Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) lalu jalankan perintah **`Developer: Restart Window`** agar ekstensi memuat plugin baru yang baru saja dipasang secara bersih.
+
 > [!IMPORTANT]
 > **Rekomendasi Ekstensi Editor**:
 > Untuk pengalaman terbaik di VS Code atau Antigravity IDE, pastikan Anda telah menginstal ekstensi resmi [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) dan [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode). Ekstensi ini diperlukan agar linting real-time, pemformatan otomatis saat menyimpan (*format on save*), dan type-only import otomatis dapat berfungsi secara maksimal.

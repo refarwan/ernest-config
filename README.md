@@ -28,6 +28,9 @@ npx ernest-config
 ```
 *No prior installation is required! The setup script will automatically configure your editor settings, update ESLint/Prettier configs, and install `ernest-config` along with all required devDependencies into your local project.*
 
+> [!TIP]
+> **VS Code Extension Caching**: If your VS Code editor still displays false-positive red underline errors after setup, reload your editor window by opening the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) and running **`Developer: Restart Window`** to force the extensions to load the newly installed plugins.
+
 > [!IMPORTANT]
 > **Editor Extensions Recommended**:
 > For the best experience in VS Code or Antigravity IDE, ensure you have installed the official [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions. This enables real-time linting, format-on-save, and automatic type-only imports to function flawlessly.
