@@ -95,19 +95,23 @@ function setupProject() {
         // Prepend import di awal berkas
         content = "import { eslintConfig } from 'ernest-config';\n" + content;
 
-        // Injeksi ...eslintConfig ke dalam pemanggilan tseslint.config atau array export
+        // Injeksi ...eslintConfig di bagian akhir tseslint.config atau array export agar tidak ditimpa
         if (content.includes("export default tseslint.config(")) {
-          content = content.replace(
-            "export default tseslint.config(",
-            "export default tseslint.config(\n  ...eslintConfig,"
-          );
-          console.log("✅ Berhasil menginjeksi eslintConfig ke dalam tseslint.config di eslint.config.mjs!");
+          const lastIndex = content.lastIndexOf(");");
+          if (lastIndex !== -1) {
+            content = content.slice(0, lastIndex) + ",\n  ...eslintConfig\n" + content.slice(lastIndex);
+            console.log("✅ Berhasil menginjeksi eslintConfig di akhir tseslint.config di eslint.config.mjs!");
+          } else {
+            console.log("\n⚠️ Pola tseslint.config tidak lengkap (tidak ditemukan ');').");
+          }
         } else if (content.includes("export default [")) {
-          content = content.replace(
-            "export default [",
-            "export default [\n  ...eslintConfig,"
-          );
-          console.log("✅ Berhasil menginjeksi eslintConfig ke dalam array export default di eslint.config.mjs!");
+          const lastIndex = content.lastIndexOf("];");
+          if (lastIndex !== -1) {
+            content = content.slice(0, lastIndex) + ",\n  ...eslintConfig\n" + content.slice(lastIndex);
+            console.log("✅ Berhasil menginjeksi eslintConfig di akhir array export default di eslint.config.mjs!");
+          } else {
+            console.log("\n⚠️ Pola export default array tidak lengkap (tidak ditemukan '];').");
+          }
         } else {
           console.log("\n⚠️ Pola export default tidak dikenali.");
           console.log("Silakan tambahkan secara manual di eslint.config.mjs:");
@@ -129,6 +133,22 @@ function setupProject() {
     }
   } catch (err) {
     console.error("❌ Gagal menginjeksi eslint.config.mjs otomatis:", err.message);
+  }
+
+  // 5. Tambahkan/Perbarui script "format" di package.json target
+  try {
+    const targetPkgJsonPath = path.join(targetDir, "package.json");
+    if (fs.existsSync(targetPkgJsonPath)) {
+      const targetPkgJson = JSON.parse(fs.readFileSync(targetPkgJsonPath, "utf8"));
+      if (!targetPkgJson.scripts) {
+        targetPkgJson.scripts = {};
+      }
+      targetPkgJson.scripts.format = 'prettier --write "src/**/*.ts" "test/**/*.ts"';
+      fs.writeFileSync(targetPkgJsonPath, JSON.stringify(targetPkgJson, null, 2), "utf8");
+      console.log("✅ Script 'format' berhasil ditambahkan/diperbarui di package.json!");
+    }
+  } catch (err) {
+    console.error("❌ Gagal menambahkan script format ke package.json:", err.message);
   }
 }
 
