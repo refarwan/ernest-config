@@ -1,0 +1,36 @@
+{
+    "trailingComma": "all",
+    "tabWidth": 4,
+    "plugins": [
+        "@ianvs/prettier-plugin-sort-imports"
+    ],
+    "importOrder": [
+        "// --- 1. VALUE IMPORTS (KODE LOGIKA) ---",
+        "<BUILTIN_MODULES>",
+        "",
+        "<THIRD_PARTY_MODULES>",
+        "",
+        "^@/(.*)service",
+        "^[./](.*)service",
+        "",
+        "^@/(.*)dto",
+        "^[./](.*)dto",
+        "",
+        "^@/",
+        "^[./]",
+        "",
+        "// --- 2. TYPE IMPORTS (INTERFACE / TYPES) ---",
+        "<TYPES><BUILTIN_MODULES>",
+        "",
+        "<TYPES>",
+        "",
+        "<TYPES>^@/",
+        "",
+        "<TYPES>^[./]"
+    ],
+    "importOrderParserPlugins": [
+        "typescript",
+        "decorators-legacy",
+        "classProperties"
+    ]
+}
