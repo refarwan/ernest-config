@@ -76,21 +76,70 @@ export default tseslint.config(
 ## 📜 Standar Pemformatan yang Diterapkan
 
 ### Pengurutan Impor Prettier
-Semua impor akan dikelompokkan dan diurutkan secara otomatis seperti berikut:
+Plugin `@ianvs/prettier-plugin-sort-imports` merapikan susunan impor Anda ke dalam kelompok logika yang jelas dan dipisahkan oleh baris kosong. Berikut adalah urutan spesifik yang diterapkan:
+
+#### 1. Value Imports (Kode Logika & Runtime)
+1. **Modul Bawaan Node.js (Built-in)**: Modul inti Node (contoh: `fs`, `path`).
+2. **Modul Pihak Ketiga (Third-party)**: Package yang diinstal (contoh: `@nestjs/common`, `express`).
+3. **Modul Lokal Alias** (menggunakan alias `@/` atau `@`), berurutan dari:
+   - **Service**: diakhiri dengan `service`.
+   - **DTO**: diakhiri dengan `dto`.
+   - **Constanta & Enum**: diakhiri dengan `constant` atau `enum`.
+   - **Utility, Function & Helper**: diakhiri dengan `util`, `function`, atau `helper`.
+   - **Modul Alias Umum**.
+4. **Modul Lokal Relatif** (menggunakan path relatif `./` atau `../`), berurutan dari:
+   - **Service**: diakhiri dengan `service`.
+   - **DTO**: diakhiri dengan `dto`.
+   - **Constanta & Enum**: diakhiri dengan `constant` atau `enum`.
+   - **Utility, Function & Helper**: diakhiri dengan `util`, `function`, atau `helper`.
+   - **Modul Relatif Umum**.
+
+#### 2. Type Imports (Tipe Data & Interface)
+Impor tipe data mengikuti hierarki struktur yang persis sama (Tipe Bawaan, Tipe Pihak Ketiga, Tipe Alias, dan Tipe Relatif), di mana masing-masing bagian juga diurutkan secara internal.
+
+Contoh impor yang sudah terurut:
 ```typescript
 // --- 1. VALUE IMPORTS (KODE LOGIKA) ---
 import fs from 'fs';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+
+// Alias Local Modules
+import { UserService } from '@/user/user.service';
+import { CreateUserDto, UpdateUserDto } from '@/user/dtos/create-user.dto';
+import { USER_ROLES, USER_STATUS } from '@/user/constants';
+import { formatDate, parseDate } from '@/common/utils';
+import { someConfig } from '@/config';
+
+// Relative Local Modules
 import { PageService } from './page.service';
-import { CreatePageDto } from './dtos/create-page.dto';
+import { CreatePageDto, UpdatePageDto } from './dtos/create-page.dto';
+import { PAGE_LIMIT, PAGE_OFFSET } from './constants';
+import { parseHtml, cleanHtml } from './utils';
+import { someLocalHelper } from './helper';
 
 // --- 2. TYPE IMPORTS (INTERFACE / TYPES) ---
-import type { Response } from 'express';
-import type { ImageInterface } from '@/common/interfaces/image.interface';
+import type { Request, Response } from 'express';
+
+// Alias Type Modules
+import type { UserInterface } from '@/user/interfaces';
+import type { ImageInterface, ImageMetadata } from '@/common/interfaces';
+
+// Relative Type Modules
+import type { PageInterface, PageMetadata } from './interfaces';
 ```
 
-### Konvensi Penamaan (`kebab-case`)
-Semua nama berkas dan nama folder di dalam direktori `src/` wajib ditulis menggunakan format kebab-case (contoh: `create-user.dto.ts` atau `auth-handler.service.ts`). Ekstensi tengah seperti `.service.ts`, `.controller.ts`, dan `.dto.ts` secara otomatis didukung dan diperbolehkan.
+### Konvensi Penamaan & Direktori
+- **kebab-case**: Semua nama berkas dan nama folder di dalam direktori `src/` wajib ditulis menggunakan format kebab-case (contoh: `create-user.dto.ts` atau `auth-handler.service.ts`). Ekstensi tengah seperti `.service.ts`, `.controller.ts`, dan `.dto.ts` secara otomatis didukung.
+- **Lokasi DTO**: Semua berkas DTO (`*.dto.ts`) wajib diletakkan di dalam folder bernama `dtos` (contoh: `src/user/dtos/create-user.dto.ts`).
+- **Struktur Direktori Interface & Type**:
+  - **Berkas Tunggal (sedikit interface)**: Gunakan satu berkas `interfaces.ts` langsung di folder modul (contoh: `src/users/interfaces.ts`).
+  - **Struktur Folder (banyak interface)**: Buat folder `interfaces/`, letakkan masing-masing berkas `*.interface.ts` atau `*.type.ts` di dalamnya, lalu ekspor semuanya melalui `interfaces/index.ts` menggunakan **named exports** (contoh: `export { User } from './user.interface';`). *Ekspor wildcard (`export *`) dilarang keras di dalam berkas index ini.*
+- **Struktur Direktori Function & Util**:
+  - **Berkas Tunggal (sedikit utilitas)**: Gunakan satu berkas `utils.ts` langsung di folder modul (contoh: `src/users/utils.ts`).
+  - **Struktur Folder (banyak utilitas)**: Buat folder `utils/`, letakkan masing-masing berkas `*.util.ts` atau `*.function.ts` di dalamnya, lalu ekspor semuanya melalui `utils/index.ts` menggunakan **named exports** (contoh: `export { formatDate } from './format-date.util';`). *Ekspor wildcard (`export *`) dilarang keras di dalam berkas index ini.*
+- **Struktur Direktori Constant & Enum**:
+  - **Berkas Tunggal (sedikit konstanta)**: Gunakan satu berkas `constants.ts` langsung di folder modul (contoh: `src/users/constants.ts`).
+  - **Struktur Folder (banyak konstanta)**: Buat folder `constants/`, letakkan masing-masing berkas `*.constant.ts` atau `*.enum.ts` di dalamnya, lalu ekspor semuanya melalui `constants/index.ts` menggunakan **named exports** (contoh: `export { USER_ROLES } from './user-roles.constant';`). *Ekspor wildcard (`export *`) dilarang keras di dalam berkas index ini.*
 
 ---
 
