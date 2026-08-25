@@ -163,6 +163,8 @@ function setupProject() {
       stdio: "inherit",
     });
     console.log("✅ Berkas kode berhasil dirapikan otomatis!");
+    console.log("\n💡 TIP: Jika editor VS Code Anda masih menampilkan garis merah/error palsu:");
+    console.log("   Buka Command Palette (Cmd+Shift+P) -> jalankan 'Developer: Restart Window' agar ekstensi memuat konfigurasi baru.\n");
   } catch (err) {
     console.warn("⚠️ Gagal menjalankan pemformatan otomatis secara langsung:", err.message);
   }
