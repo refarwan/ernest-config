@@ -163,10 +163,22 @@ function setupProject() {
       stdio: "inherit",
     });
     console.log("✅ Berkas kode berhasil dirapikan otomatis!");
+  } catch (err) {
+    console.warn("⚠️ Gagal menjalankan pemformatan otomatis secara langsung:", err.message);
+  }
+
+  // 7. Jalankan linter otomatis pertama kali setelah format selesai
+  try {
+    console.log("🔍 Menjalankan linter perdana (npm run lint) untuk memperbaiki tipe impor...");
+    execSync("npm run lint", {
+      cwd: targetDir,
+      stdio: "inherit",
+    });
+    console.log("✅ Berkas kode berhasil di-lint secara otomatis!");
     console.log("\n💡 TIP: Jika editor VS Code Anda masih menampilkan garis merah/error palsu:");
     console.log("   Buka Command Palette (Cmd+Shift+P) -> jalankan 'Developer: Restart Window' agar ekstensi memuat konfigurasi baru.\n");
   } catch (err) {
-    console.warn("⚠️ Gagal menjalankan pemformatan otomatis secara langsung:", err.message);
+    console.warn("⚠️ Gagal menjalankan linter otomatis secara langsung:", err.message);
   }
 }
 
