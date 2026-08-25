@@ -147,7 +147,7 @@ function setupProject() {
       if (!targetPkgJson.scripts) {
         targetPkgJson.scripts = {};
       }
-      targetPkgJson.scripts.format = 'prettier --write "src/**/*.ts" "test/**/*.ts"';
+      targetPkgJson.scripts.format = 'prettier --write "src/**/*.ts" "test/**/*.ts" "*.{js,mjs,json}"';
       fs.writeFileSync(targetPkgJsonPath, JSON.stringify(targetPkgJson, null, 2), "utf8");
       console.log("✅ Script 'format' berhasil ditambahkan/diperbarui di package.json!");
     }

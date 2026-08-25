@@ -3,10 +3,10 @@ const checkFile = require("eslint-plugin-check-file");
 const eslintConfig = [
   {
     rules: {
-      "@typescript-eslint/consistent-type-imports": [
+      "@typescript-eslint/consistent-type-imports": /** @type {const} */ ([
         "error",
         { prefer: "type-imports" },
-      ],
+      ]),
       "@typescript-eslint/no-explicit-any": "error",
     },
   },
