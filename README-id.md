@@ -19,15 +19,17 @@ Orkestrator Prettier & ESLint terbaik, tanpa konfigurasi ribet untuk proyek Nest
 
 ---
 
-## 📦 Instalasi
+## 📦 Instalasi & Setup
 
-Untuk menerapkan standar konfigurasi ini ke proyek NestJS/TypeScript Anda, cukup instal package ini sebagai development dependency:
+1. Instal package ini sebagai development dependency:
+   ```bash
+   npm install --save-dev ernest-config
+   ```
 
-```bash
-npm install --save-dev ernest-config
-```
-
-Selesai! Script setup `postinstall` akan berjalan secara otomatis di latar belakang.
+2. Jalankan script inisialisasi untuk mengonfigurasi ESLint, Prettier, dan VS Code secara otomatis:
+   ```bash
+   npx ernest-config
+   ```
 
 > [!IMPORTANT]
 > **Rekomendasi Ekstensi Editor**:
@@ -37,7 +39,7 @@ Selesai! Script setup `postinstall` akan berjalan secara otomatis di latar belak
 
 ## ⚙️ Cara Kerja (Setup Otomatis)
 
-Saat Anda menjalankan perintah install, script postinstall akan mengeksekusi langkah-langkah berikut di folder root proyek Anda:
+Saat Anda menjalankan `npx ernest-config`, script inisialisasi akan mengeksekusi langkah-langkah berikut di folder root proyek Anda:
 
 1. **Menyalin `.prettierrc`**: Menyediakan aturan terstruktur untuk pengurutan impor dan pemformatan kode.
 2. **Mengonfigurasi Pengaturan VS Code**: Menggabungkan konfigurasi secara aman ke dalam `.vscode/settings.json` Anda untuk mengaktifkan fitur type-only auto-imports.

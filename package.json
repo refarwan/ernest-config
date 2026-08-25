@@ -1,9 +1,9 @@
 {
   "name": "ernest-config",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "main": "index.js",
-  "scripts": {
-    "postinstall": "node scripts/setup.js"
+  "bin": {
+    "ernest-config": "./scripts/setup.js"
   },
   "files": [
     "index.js",

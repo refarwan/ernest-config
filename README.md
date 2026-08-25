@@ -19,15 +19,17 @@ The ultimate, zero-config Prettier & ESLint orchestrator for NestJS and TypeScri
 
 ---
 
-## 📦 Installation
+## 📦 Installation & Setup
 
-To apply these standard configurations to your NestJS/TypeScript project, simply install the package as a development dependency:
+1. Install the package as a development dependency:
+   ```bash
+   npm install --save-dev ernest-config
+   ```
 
-```bash
-npm install --save-dev ernest-config
-```
-
-That's it! The `postinstall` setup script will run automatically.
+2. Run the initialization script to automatically configure ESLint, Prettier, and VS Code settings:
+   ```bash
+   npx ernest-config
+   ```
 
 > [!IMPORTANT]
 > **Editor Extensions Recommended**:
@@ -37,7 +39,7 @@ That's it! The `postinstall` setup script will run automatically.
 
 ## ⚙️ How It Works (Automatic Setup)
 
-When you run `npm install`, the postinstall script runs the following steps in your project root:
+When you run `npx ernest-config`, the initialization script runs the following steps in your project root:
 
 1. **Copies `.prettierrc`**: Adds structured rules for import sorting and code formatting.
 2. **Configures VS Code Settings**: Safely merges standard settings into your `.vscode/settings.json` to enable type-only auto-imports.
