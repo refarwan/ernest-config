@@ -1,11 +1,21 @@
 {
   "name": "ernest-config",
-  "version": "1.0.0-beta.9",
+  "version": "1.0.0-beta.10",
   "main": "index.js",
   "types": "index.d.ts",
   "bin": {
     "ernest-config": "./scripts/setup.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/refarwan/ernest-config.git"
+  },
+  "homepage": "https://www.refarwan.com",
+  "bugs": {
+    "url": "https://github.com/refarwan/ernest-config/issues"
+  },
+  "author": "refarwan",
+  "license": "MIT",
   "files": [
     "index.js",
     "index.d.ts",
