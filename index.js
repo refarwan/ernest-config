@@ -7,6 +7,7 @@ const eslintConfig = [
         "error",
         { prefer: "type-imports" },
       ],
+      "@typescript-eslint/no-explicit-any": "error",
     },
   },
   {
@@ -56,6 +57,17 @@ const eslintConfig = [
             "Wildcard exports (export * from '...') are not allowed in interfaces/utils/constants index.ts files. Please use named exports instead: export { Name } from './file';",
         },
       ],
+    },
+  },
+  {
+    files: ["**/*.spec.ts", "**/*.e2e-spec.ts", "test/**/*.ts"],
+    rules: {
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/no-unsafe-argument": "off",
+      "@typescript-eslint/no-unsafe-return": "off",
+      "@typescript-eslint/no-floating-promises": "off",
     },
   },
 ];

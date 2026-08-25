@@ -2,6 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
+const pkgJson = require("../package.json");
 
 const projectRoot = process.env.INIT_CWD || process.cwd();
 
@@ -61,6 +62,7 @@ function setupProject() {
   // 3. Install devDependencies ke project user
   try {
     const devDeps = [
+      `ernest-config@${pkgJson.version}`,
       "prettier",
       "eslint",
       "eslint-config-prettier",

@@ -15,21 +15,18 @@ The ultimate, zero-config Prettier & ESLint orchestrator for NestJS and TypeScri
 - 📐 **Strict Type-only Imports**: Configures VS Code and ESLint to automatically use `import type { ... }` for interfaces and types.
 - 📁 **Kebab-Case Enforcer**: Ensures files and directories strictly follow the `kebab-case` convention.
 - 🔮 **Smart Import Sorting**: Auto-sorts imports, separating standard imports from type-only imports.
+- 🚫 **No Explicit Any**: Strictly forbids the usage of the `any` type, prompting you to write type-safe code instead.
 - 🛠️ **Idempotent Setup Script**: Won't corrupt or duplicate imports if run multiple times.
 
 ---
 
 ## 📦 Installation & Setup
 
-1. Install the package as a development dependency:
-   ```bash
-   npm install --save-dev ernest-config
-   ```
-
-2. Run the initialization script to automatically configure ESLint, Prettier, and VS Code settings:
-   ```bash
-   npx ernest-config
-   ```
+To apply these standard configurations, simply run the initialization command directly in your project root:
+```bash
+npx ernest-config
+```
+*No prior installation is required! The setup script will automatically configure your editor settings, update ESLint/Prettier configs, and install `ernest-config` along with all required devDependencies into your local project.*
 
 > [!IMPORTANT]
 > **Editor Extensions Recommended**:

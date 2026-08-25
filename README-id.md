@@ -15,21 +15,18 @@ Orkestrator Prettier & ESLint terbaik, tanpa konfigurasi ribet untuk proyek Nest
 - 📐 **Paksakan Type-only Import**: Mengonfigurasi VS Code dan ESLint untuk otomatis menulis `import type { ... }` pada interface dan type.
 - 📁 **Pewajiban Kebab-Case**: Memastikan semua berkas dan direktori mematuhi format penamaan `kebab-case`.
 - 🔮 **Pengurutan Impor Cerdas**: Mengurutkan impor secara otomatis, memisahkan impor modul logika dan impor tipe data.
+- 🚫 **Larangan Penggunaan Tipe `any`**: Melarang keras penggunaan tipe data `any` demi menjaga kebersihan dan keamanan tipe data (*type-safety*) kode Anda.
 - 🛠️ **Script Setup Idempotent**: Tidak akan merusak atau menduplikasi impor jika dijalankan berkali-kali.
 
 ---
 
 ## 📦 Instalasi & Setup
 
-1. Instal package ini sebagai development dependency:
-   ```bash
-   npm install --save-dev ernest-config
-   ```
-
-2. Jalankan script inisialisasi untuk mengonfigurasi ESLint, Prettier, dan VS Code secara otomatis:
-   ```bash
-   npx ernest-config
-   ```
+Untuk menerapkan standar konfigurasi ini, cukup jalankan perintah inisialisasi berikut langsung di folder root proyek Anda:
+```bash
+npx ernest-config
+```
+*Tidak perlu melakukan instalasi awal! Script setup akan secara otomatis mengatur konfigurasi editor Anda, memperbarui eslint/prettier config, serta menginstal `ernest-config` beserta seluruh devDependencies yang dibutuhkan ke dalam proyek lokal Anda.*
 
 > [!IMPORTANT]
 > **Rekomendasi Ekstensi Editor**:
