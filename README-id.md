@@ -48,32 +48,6 @@ Saat Anda menjalankan `npx ernest-config`, script inisialisasi akan mengeksekusi
 
 ---
 
-## 🛠️ Integrasi Manual (Cadangan)
-
-Jika Anda memiliki struktur proyek kustom dan script setup melewati proses injeksi otomatis, Anda dapat menambahkannya secara manual dalam dua langkah mudah:
-
-### 1. Perbarui `eslint.config.mjs`
-
-```javascript
-import { eslintConfig } from 'ernest-config';
-import tseslint from 'typescript-eslint';
-
-export default tseslint.config(
-  ...eslintConfig, // <-- Tambahkan spread operator ini di awal array
-  
-  // Konfigurasi kustom Anda yang lain...
-);
-```
-
-### 2. Perbarui `.vscode/settings.json`
-
-```json
-{
-  "typescript.preferences.preferTypeOnlyAutoImports": true
-}
-```
-
----
 
 ## 📜 Standar Pemformatan yang Diterapkan
 

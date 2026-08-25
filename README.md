@@ -48,32 +48,6 @@ When you run `npx ernest-config`, the initialization script runs the following s
 
 ---
 
-## 🛠️ Manual Integration (Fallback)
-
-If you have a customized setup and the script skips automatic injection, you can add it manually in just two steps:
-
-### 1. Update `eslint.config.mjs`
-
-```javascript
-import { eslintConfig } from 'ernest-config';
-import tseslint from 'typescript-eslint';
-
-export default tseslint.config(
-  ...eslintConfig, // <-- Add this spread operator at the start
-  
-  // Your other custom configurations...
-);
-```
-
-### 2. Update `.vscode/settings.json`
-
-```json
-{
-  "typescript.preferences.preferTypeOnlyAutoImports": true
-}
-```
-
----
 
 ## 📜 Formatting Standards Applied
 
