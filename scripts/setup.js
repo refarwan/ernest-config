@@ -99,7 +99,9 @@ function setupProject() {
         if (content.includes("export default tseslint.config(")) {
           const lastIndex = content.lastIndexOf(");");
           if (lastIndex !== -1) {
-            content = content.slice(0, lastIndex) + ",\n  ...eslintConfig\n" + content.slice(lastIndex);
+            const prefix = content.slice(0, lastIndex);
+            const comma = prefix.trim().endsWith(",") ? "" : ",";
+            content = prefix + `${comma}\n  ...eslintConfig\n` + content.slice(lastIndex);
             console.log("✅ Berhasil menginjeksi eslintConfig di akhir tseslint.config di eslint.config.mjs!");
           } else {
             console.log("\n⚠️ Pola tseslint.config tidak lengkap (tidak ditemukan ');').");
@@ -107,7 +109,9 @@ function setupProject() {
         } else if (content.includes("export default [")) {
           const lastIndex = content.lastIndexOf("];");
           if (lastIndex !== -1) {
-            content = content.slice(0, lastIndex) + ",\n  ...eslintConfig\n" + content.slice(lastIndex);
+            const prefix = content.slice(0, lastIndex);
+            const comma = prefix.trim().endsWith(",") ? "" : ",";
+            content = prefix + `${comma}\n  ...eslintConfig\n` + content.slice(lastIndex);
             console.log("✅ Berhasil menginjeksi eslintConfig di akhir array export default di eslint.config.mjs!");
           } else {
             console.log("\n⚠️ Pola export default array tidak lengkap (tidak ditemukan '];').");
@@ -149,6 +153,18 @@ function setupProject() {
     }
   } catch (err) {
     console.error("❌ Gagal menambahkan script format ke package.json:", err.message);
+  }
+
+  // 6. Jalankan format otomatis pertama kali setelah instalasi selesai
+  try {
+    console.log("🧹 Menjalankan pemformatan kode perdana (npm run format)...");
+    execSync("npm run format", {
+      cwd: targetDir,
+      stdio: "inherit",
+    });
+    console.log("✅ Berkas kode berhasil dirapikan otomatis!");
+  } catch (err) {
+    console.warn("⚠️ Gagal menjalankan pemformatan otomatis secara langsung:", err.message);
   }
 }
 
