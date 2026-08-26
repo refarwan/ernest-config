@@ -12,6 +12,8 @@
         "<THIRD_PARTY_MODULES>",
         "",
         "// ALIAS LOCAL MODULES",
+        "^(@|src)/(.*)module",
+        "^(@|src)/(.*)controller",
         "^(@|src)/(.*)service",
         "^(@|src)/(.*)dto",
         "^(@|src)/(.*)constant",
@@ -22,6 +24,8 @@
         "^(@|src)/",
         "",
         "// RELATIVE LOCAL MODULES",
+        "^[./](.*)module",
+        "^[./](.*)controller",
         "^[./](.*)service",
         "^[./](.*)dto",
         "^[./](.*)constant",
@@ -37,6 +41,8 @@
         "<TYPES>",
         "",
         "// ALIAS TYPE MODULES",
+        "<TYPES>^(@|src)/(.*)module",
+        "<TYPES>^(@|src)/(.*)controller",
         "<TYPES>^(@|src)/(.*)service",
         "<TYPES>^(@|src)/(.*)dto",
         "<TYPES>^(@|src)/(.*)constant",
@@ -47,6 +53,8 @@
         "<TYPES>^(@|src)/",
         "",
         "// RELATIVE TYPE MODULES",
+        "<TYPES>^[./](.*)module",
+        "<TYPES>^[./](.*)controller",
         "<TYPES>^[./](.*)service",
         "<TYPES>^[./](.*)dto",
         "<TYPES>^[./](.*)constant",
@@ -60,5 +68,13 @@
         "typescript",
         "decorators-legacy",
         "classProperties"
+    ],
+    "overrides": [
+        {
+            "files": "**/generated/prisma/**/*",
+            "options": {
+                "requirePragma": true
+            }
+        }
     ]
 }
