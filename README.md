@@ -1,6 +1,6 @@
 # 🚀 ernest-config
 
-Translations: [English](README.md) | [Bahasa Indonesia](README-id.md)
+Translations: [English](https://github.com/refarwan/ernest-config/blob/main/README.md) | [Bahasa Indonesia](https://github.com/refarwan/ernest-config/blob/main/README-id.md)
 
 [![npm version](https://img.shields.io/npm/v/ernest-config.svg?style=flat-flat&color=3399ff)](https://www.npmjs.com/package/ernest-config)
 [![license](https://img.shields.io/npm/l/ernest-config.svg?style=flat-flat&color=47d147)](https://github.com/refarwan/ernest-config)
@@ -109,13 +109,13 @@ import type { PageInterface, PageMetadata } from './interfaces';
 - **DTOs Location**: All DTO files (`*.dto.ts`) must be placed inside a folder named `dtos` (e.g. `src/user/dtos/create-user.dto.ts`).
 - **Interfaces & Types Directory Structure**:
   - **Single file (few interfaces)**: Use a single `interfaces.ts` file directly in the module folder (e.g. `src/users/interfaces.ts`).
-  - **Folder structure (multiple interfaces)**: Create an `interfaces/` folder, place individual `*.interface.ts` or `*.type.ts` files inside, and export them all from `interfaces/index.ts` using **named exports** (e.g. `export { User } from './user.interface';`). *Wildcard exports (`export *`) are strictly forbidden inside these index files.*
+  - **Folder structure (multiple interfaces)**: Create an `interfaces/` folder, place individual `*.interface.ts` or `*.type.ts` files inside, and export them all from `interfaces/index.ts` using **named exports** (e.g. `export { User } from './user.interface';`). *Wildcard exports (`export *`) are strictly forbidden in all source files (except the `src/generated` folder).*
 - **Functions & Utilities Directory Structure**:
   - **Single file (few utilities)**: Use a single `utils.ts` file directly in the module folder (e.g. `src/users/utils.ts`).
-  - **Folder structure (multiple utilities)**: Create a `utils/` folder, place individual `*.util.ts` or `*.function.ts` files inside, and export them all from `utils/index.ts` using **named exports** (e.g. `export { formatDate } from './format-date.util';`). *Wildcard exports (`export *`) are strictly forbidden inside these index files.*
+  - **Folder structure (multiple utilities)**: Create a `utils/` folder, place individual `*.util.ts` or `*.function.ts` files inside, and export them all from `utils/index.ts` using **named exports** (e.g. `export { formatDate } from './format-date.util';`). *Wildcard exports (`export *`) are strictly forbidden in all source files (except the `src/generated` folder).*
 - **Constants & Enums Directory Structure**:
   - **Single file (few constants)**: Use a single `constants.ts` file directly in the module folder (e.g. `src/users/constants.ts`).
-  - **Folder structure (multiple constants)**: Create a `constants/` folder, place individual `*.constant.ts` or `*.enum.ts` files inside, and export them all from `constants/index.ts` using **named exports** (e.g. `export { USER_ROLES } from './user-roles.constant';`). *Wildcard exports (`export *`) are strictly forbidden inside these index files.*
+  - **Folder structure (multiple constants)**: Create a `constants/` folder, place individual `*.constant.ts` or `*.enum.ts` files inside, and export them all from `constants/index.ts` using **named exports** (e.g. `export { USER_ROLES } from './user-roles.constant';`). *Wildcard exports (`export *`) are strictly forbidden in all source files (except the `src/generated` folder).*
 
 ---
 
