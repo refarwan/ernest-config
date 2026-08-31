@@ -4,7 +4,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "bin": {
-    "ernest-config": "./scripts/setup.js"
+    "ernest-config": "scripts/setup.js"
   },
   "repository": {
     "type": "git",
