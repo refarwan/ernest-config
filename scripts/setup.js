@@ -28,35 +28,60 @@ function setupProject() {
     console.error("❌ Gagal me-copy file .prettierrc:", err.message);
   }
 
-  // 2. Copy / Merge .vscode/settings.json
+  // 2. Copy / Merge .vscode (settings.json & extensions.json)
   try {
-    const vscodeTemplatePath = path.join(__dirname, "../templates/.vscode/settings.json");
     const vscodeTargetDir = path.join(targetDir, ".vscode");
-    const vscodeTargetPath = path.join(vscodeTargetDir, "settings.json");
+    if (!fs.existsSync(vscodeTargetDir)) {
+      fs.mkdirSync(vscodeTargetDir, { recursive: true });
+    }
 
-    if (fs.existsSync(vscodeTemplatePath)) {
-      if (!fs.existsSync(vscodeTargetDir)) {
-        fs.mkdirSync(vscodeTargetDir, { recursive: true });
-      }
-
+    // 2.1 settings.json
+    const vscodeTemplateSettings = path.join(__dirname, "../templates/.vscode/settings.json");
+    const vscodeTargetSettings = path.join(vscodeTargetDir, "settings.json");
+    if (fs.existsSync(vscodeTemplateSettings)) {
       let mergedSettings = {};
-      if (fs.existsSync(vscodeTargetPath)) {
+      if (fs.existsSync(vscodeTargetSettings)) {
         try {
-          const existingContent = fs.readFileSync(vscodeTargetPath, "utf8");
+          const existingContent = fs.readFileSync(vscodeTargetSettings, "utf8");
           mergedSettings = JSON.parse(existingContent);
         } catch (e) {
           console.warn("⚠️ Gagal membaca settings.json yang sudah ada, akan ditimpa.");
         }
       }
-
-      const templateSettings = JSON.parse(fs.readFileSync(vscodeTemplatePath, "utf8"));
+      const templateSettings = JSON.parse(fs.readFileSync(vscodeTemplateSettings, "utf8"));
       mergedSettings = { ...mergedSettings, ...templateSettings };
-
-      fs.writeFileSync(vscodeTargetPath, JSON.stringify(mergedSettings, null, 2), "utf8");
+      fs.writeFileSync(vscodeTargetSettings, JSON.stringify(mergedSettings, null, 2), "utf8");
       console.log("✅ File .vscode/settings.json berhasil dikonfigurasi!");
     }
+
+    // 2.2 extensions.json
+    const vscodeTemplateExtensions = path.join(__dirname, "../templates/.vscode/extensions.json");
+    const vscodeTargetExtensions = path.join(vscodeTargetDir, "extensions.json");
+    if (fs.existsSync(vscodeTemplateExtensions)) {
+      let mergedExtensions = { recommendations: [] };
+      if (fs.existsSync(vscodeTargetExtensions)) {
+        try {
+          const existingExt = JSON.parse(fs.readFileSync(vscodeTargetExtensions, "utf8"));
+          if (Array.isArray(existingExt.recommendations)) {
+            mergedExtensions.recommendations = existingExt.recommendations;
+          }
+        } catch (e) {
+          console.warn("⚠️ Gagal membaca extensions.json yang sudah ada.");
+        }
+      }
+      const templateExt = JSON.parse(fs.readFileSync(vscodeTemplateExtensions, "utf8"));
+      if (Array.isArray(templateExt.recommendations)) {
+        templateExt.recommendations.forEach((item) => {
+          if (!mergedExtensions.recommendations.includes(item)) {
+            mergedExtensions.recommendations.push(item);
+          }
+        });
+      }
+      fs.writeFileSync(vscodeTargetExtensions, JSON.stringify(mergedExtensions, null, 2), "utf8");
+      console.log("✅ File .vscode/extensions.json berhasil dikonfigurasi!");
+    }
   } catch (err) {
-    console.error("❌ Gagal mengatur .vscode/settings.json:", err.message);
+    console.error("❌ Gagal mengatur file .vscode:", err.message);
   }
 
   // 3. Install devDependencies ke project user

@@ -11,7 +11,7 @@ The ultimate, zero-config Prettier & ESLint orchestrator for NestJS and TypeScri
 
 ## ✨ Features
 
-- ⚡ **Auto-pilot Setup**: Automatically copies configuration templates and merges settings upon installation.
+- ⚡ **Auto-pilot Setup**: Installs required devDependencies, copies configuration templates, and configures `.vscode` settings and recommended extensions automatically.
 - 📐 **Strict Type-only Imports**: Configures VS Code and ESLint to automatically use `import type { ... }` for interfaces and types.
 - 📁 **Kebab-Case Enforcer**: Ensures files and directories strictly follow the `kebab-case` convention.
 - 🔮 **Smart Import Sorting**: Auto-sorts imports, separating standard imports from type-only imports.
@@ -33,7 +33,7 @@ npx ernest-config
 
 > [!IMPORTANT]
 > **Editor Extensions Recommended**:
-> For the best experience in VS Code or Antigravity IDE, ensure you have installed the official [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions. This enables real-time linting, format-on-save, and automatic type-only imports to function flawlessly.
+> For the best experience in VS Code or Antigravity IDE, ensure you have installed the official [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions (which are auto-recommended in `.vscode/extensions.json`). This enables real-time linting, format-on-save, and automatic type-only imports to function flawlessly.
 
 ---
 
@@ -42,7 +42,9 @@ npx ernest-config
 When you run `npx ernest-config`, the initialization script runs the following steps in your project root:
 
 1. **Copies `.prettierrc`**: Adds structured rules for import sorting and code formatting.
-2. **Configures VS Code Settings**: Safely merges standard settings into your `.vscode/settings.json` to enable type-only auto-imports.
+2. **Configures `.vscode` Templates**:
+   - Safely merges standard settings into `.vscode/settings.json` (enabling type-only auto-imports and ESLint `source.fixAll.eslint` on save).
+   - Generates `.vscode/extensions.json` with workspace extension recommendations.
 3. **Installs Dev Dependencies**: Installs the required plugins (`eslint-plugin-check-file`, `@ianvs/prettier-plugin-sort-imports`, `eslint-config-prettier`, etc.) to your local project.
 4. **Modifies `eslint.config.mjs`**: Automatically injects `eslintConfig` at the start of your ESLint Flat Config.
 

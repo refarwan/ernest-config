@@ -11,7 +11,7 @@ Orkestrator Prettier & ESLint terbaik, tanpa konfigurasi ribet untuk proyek Nest
 
 ## ✨ Fitur
 
-- ⚡ **Setup Otomatis**: Secara otomatis menyalin template konfigurasi dan menggabungkan pengaturan setelah instalasi selesai.
+- ⚡ **Setup Otomatis**: Memasang devDependencies yang diperlukan, menyalin template konfigurasi, dan mengonfigurasi pengaturan `.vscode` serta rekomendasi ekstensi secara otomatis.
 - 📐 **Paksakan Type-only Import**: Mengonfigurasi VS Code dan ESLint untuk otomatis menulis `import type { ... }` pada interface dan type.
 - 📁 **Pewajiban Kebab-Case**: Memastikan semua berkas dan direktori mematuhi format penamaan `kebab-case`.
 - 🔮 **Pengurutan Impor Cerdas**: Mengurutkan impor secara otomatis, memisahkan impor modul logika dan impor tipe data.
@@ -33,7 +33,7 @@ npx ernest-config
 
 > [!IMPORTANT]
 > **Rekomendasi Ekstensi Editor**:
-> Untuk pengalaman terbaik di VS Code atau Antigravity IDE, pastikan Anda telah menginstal ekstensi resmi [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) dan [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode). Ekstensi ini diperlukan agar linting real-time, pemformatan otomatis saat menyimpan (*format on save*), dan type-only import otomatis dapat berfungsi secara maksimal.
+> Untuk pengalaman terbaik di VS Code atau Antigravity IDE, pastikan Anda telah menginstal ekstensi resmi [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) dan [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) (yang juga direkomendasikan secara otomatis di `.vscode/extensions.json`). Ekstensi ini diperlukan agar linting real-time, pemformatan otomatis saat menyimpan (*format on save*), dan type-only import otomatis dapat berfungsi secara maksimal.
 
 ---
 
@@ -42,7 +42,9 @@ npx ernest-config
 Saat Anda menjalankan `npx ernest-config`, script inisialisasi akan mengeksekusi langkah-langkah berikut di folder root proyek Anda:
 
 1. **Menyalin `.prettierrc`**: Menyediakan aturan terstruktur untuk pengurutan impor dan pemformatan kode.
-2. **Mengonfigurasi Pengaturan VS Code**: Menggabungkan konfigurasi secara aman ke dalam `.vscode/settings.json` Anda untuk mengaktifkan fitur type-only auto-imports.
+2. **Mengonfigurasi Template `.vscode`**:
+   - Menggabungkan konfigurasi secara aman ke dalam `.vscode/settings.json` (mengaktifkan type-only auto-imports dan `source.fixAll.eslint` saat save).
+   - Membuat berkas `.vscode/extensions.json` berisi rekomendasi ekstensi workspace.
 3. **Menginstal Dev Dependencies**: Memasang plugin yang diperlukan (`eslint-plugin-check-file`, `@ianvs/prettier-plugin-sort-imports`, `eslint-config-prettier`, dll.) ke dalam proyek lokal Anda.
 4. **Memodifikasi `eslint.config.mjs`**: Secara otomatis menyisipkan aturan `eslintConfig` pada awal konfigurasi ESLint Flat Config Anda.
 
